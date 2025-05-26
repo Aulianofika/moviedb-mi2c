@@ -4,11 +4,11 @@
 <div class="container mt-4 mb-5">
     <div class="row">
         <div class="col-md-5">
-            <img src="{{ $movie->cover_image }}" alt="{{ $movie->title }}" class="img-fluid rounded shadow-sm">
-        </div>
+            <img src="{{ asset('/'.$movie->cover_image) }}" class="img-fluid rounded-start" alt="...">
+                    </div>
         <div class="col-md-7">
             <h3>{{ $movie->title }}</h3>
-            <p>{{ $movie->synopsis }}</p>
+            <p> <br>Sypnopsis: <br> {{ $movie->synopsis }}</p>
 
             @if (!empty($movie->actors))
                 <p><strong>Actors:</strong> {{ $movie->actors }}</p>
