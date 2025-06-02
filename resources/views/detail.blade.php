@@ -4,7 +4,7 @@
 <div class="container mt-4 mb-5">
     <div class="row">
         <div class="col-md-5">
-            <img src="{{ asset('/'.$movie->cover_image) }}" class="img-fluid rounded-start" alt="...">
+            <img src="{{ asset('storage/'.$movie->cover_image) }}" class="img-fluid rounded-start" alt="...">
                     </div>
         <div class="col-md-7">
             <h3>{{ $movie->title }}</h3>
