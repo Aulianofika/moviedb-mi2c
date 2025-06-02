@@ -4,6 +4,13 @@
 <div class="row">
     <div class="col-lg-4">
         <h1>Login Form</h1>
+        @if ($errors->any)
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{$errors->first('email')}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        
+        @endif
         <form method="post" action="/login">
             @csrf
                 <div class="mb-3">

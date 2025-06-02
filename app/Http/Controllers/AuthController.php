@@ -23,7 +23,8 @@ class AuthController extends Controller
         if(Auth::attempt($credentials)){
 
             $request->session()->regenerate();
-            return redirect()->intended('/');
+            return redirect()->intended('/')->with('success','login Successfully, 
+    Welcome ' . Auth::user()->name);
         
         }
         return back()->withErrors([
@@ -35,10 +36,8 @@ class AuthController extends Controller
 {
     Auth::logout();
  
-    $request->session()->invalidate();
- 
+    $request->session()->invalidate(); 
     $request->session()->regenerateToken();
- 
     return redirect('/');
 }
 }
