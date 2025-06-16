@@ -24,6 +24,16 @@
                         <h5 class="card-title">{{ $movie->title }}</h5>
                         <p class="card-text">{{Str::words($movie->synopsis, 20,'...') }}</p>
                     <a href="{{ route('movie.detail', $movie->id) }}" class="btn btn-success">See More</a>
+                    @auth
+                        <a href="{{ route('movies.edit', $movie->id) }}" class="btn btn-primary ms-2">Edit</a>
+                        @can('delete')
+                        <form action="{{ route('movies.destroy', $movie->id) }}" method="POST" class="d-inline ms-2" onsubmit="return confirm('Are you sure you want to delete this movie?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                        @endcan
+                        @endauth
                     </div>
                     </div>
                 </div>
