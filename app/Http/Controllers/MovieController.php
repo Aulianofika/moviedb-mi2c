@@ -159,11 +159,18 @@ public function update(Request $request, $id)
     ]);
 
     // update cover
-    if ($request->hasFile('cover')) {
-        $coverName = time() . '.' . $request->cover->extension();
-        $request->cover->move(public_path('covers'), $coverName);
-        $movie->cover_image = $coverName;
+    // Jika ada gambar baru diupload
+    if ($request->hasFile('cover_image')) {
+        // Hapus file lama jika ada
+        if ($movie->cover_image && file_exists(storage_path('app/public/' . $movie->cover_image))) {
+            unlink(storage_path('app/public/' . $movie->cover_image));
+        }
+
+        // Simpan file baru
+        $coverPath = $request->file('cover_image')->store('covers', 'public');
+        $movie->cover_image = $coverPath;
     }
+
 
     $movie->update([
         'title' => $request->title,

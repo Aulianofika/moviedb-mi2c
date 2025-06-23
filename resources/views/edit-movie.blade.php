@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container mt-5">
-    <h2 class="mb-4">Edit Movie</h2>
+    <h2>Edit Movie</h2>
 
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -20,22 +20,20 @@
 
         <div class="mb-3">
             <label for="title" class="form-label">Judul</label>
-            <input type="text" name="title" id="title" class="form-control"
-                   value="{{ old('title', $movie->title) }}" required>
+            <input type="text" name="title" class="form-control" value="{{ old('title', $movie->title) }}" required>
         </div>
 
         <div class="mb-3">
-            <label for="synopsis" class="form-label">Synopsis</label>
-            <textarea name="synopsis" id="synopsis" class="form-control" rows="4">{{ old('synopsis', $movie->synopsis) }}</textarea>
+            <label for="synopsis" class="form-label">Sinopsis</label>
+            <textarea name="synopsis" class="form-control" rows="3">{{ old('synopsis', $movie->synopsis) }}</textarea>
         </div>
 
         <div class="mb-3">
             <label for="category_id" class="form-label">Kategori</label>
-            <select name="category_id" id="category_id" class="form-select" required>
+            <select name="category_id" class="form-select" required>
                 <option value="">-- Pilih Kategori --</option>
                 @foreach($categories as $category)
-                    <option value="{{ $category->id }}"
-                        {{ $category->id == $movie->category_id ? 'selected' : '' }}>
+                    <option value="{{ $category->id }}" {{ $movie->category_id == $category->id ? 'selected' : '' }}>
                         {{ $category->category_name }}
                     </option>
                 @endforeach
@@ -44,25 +42,26 @@
 
         <div class="mb-3">
             <label for="year" class="form-label">Tahun</label>
-            <input type="text" name="year" id="year" class="form-control"
-                   value="{{ old('year', $movie->year) }}" required>
+            <input type="text" name="year" class="form-control" value="{{ old('year', $movie->year) }}" required>
         </div>
 
         <div class="mb-3">
             <label for="actors" class="form-label">Aktor</label>
-            <input type="text" name="actors" id="actors" class="form-control"
-                   value="{{ old('actors', $movie->actors) }}">
+            <input type="text" name="actors" class="form-control" value="{{ old('actors', $movie->actors) }}">
         </div>
 
         <div class="mb-3">
-            <label for="cover" class="form-label">Cover</label>
-            <input type="file" name="cover" id="cover" class="form-control">
+            <label for="cover_image" class="form-label">Gambar Cover</label>
+            <input type="file" name="cover_image" class="form-control">
             @if($movie->cover_image)
-                <img src="{{ asset('covers/' . $movie->cover_image) }}" alt="Cover Image" class="img-thumbnail mt-2" width="150">
+                <div class="mt-2">
+                    
+                    <img src="{{ asset('storage/' . $movie->cover_image) }}" alt="Cover Image" width="150" class="img-thumbnail">
+                </div>
             @endif
         </div>
 
-        <button type="submit" class="btn btn-primary">Update Movie</button>
+        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
         <a href="{{ url('/') }}" class="btn btn-secondary">Batal</a>
     </form>
 </div>
